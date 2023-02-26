@@ -29,7 +29,7 @@ export class UsersController {
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('/')
   getUsers() {
-    return this.userService.findUsers();
+    return this.userService.getUsers();
   }
 
   @UseInterceptors(ClassSerializerInterceptor)
@@ -46,7 +46,7 @@ export class UsersController {
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('/username/:username')
   getByUsername(@Param('username') username: string) {
-    const user = this.userService.findUserByUsername(username);
+    const user = this.userService.getUserByUsername(username);
     if (user) return new SerializedUser(user);
     else throw new HttpException('User not found!', HttpStatus.BAD_REQUEST);
   }

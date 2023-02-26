@@ -14,11 +14,11 @@ export class UsersService {
 
   private users: User[] = [];
 
-  findUsers() {
+  async getUsers(): Promise<User[]> {
     return this.users.map((user) => new SerializedUser(user));
   }
 
-  findUserByUsername(username: string) {
+  getUserByUsername(username: string) {
     return this.users.find((user) => user.username === username);
   }
 
@@ -30,5 +30,9 @@ export class UsersService {
     const newUser = this.userRepository.create(createUserDto);
 
     return this.userRepository.save(newUser);
+  }
+
+  findUserByUsername(email: string) {
+    return this.userRepository.findOneBy({ username: email });
   }
 }
